@@ -1,0 +1,34 @@
+﻿<Window x:Class="Remont.Fix"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Remont"
+        mc:Ignorable="d"
+        Title="Fix" Height="450" Width="800">
+    <Grid>
+        <Button Content="Назад" HorizontalAlignment="Left" Margin="622,368,0,0" VerticalAlignment="Top" Click="Button_Click" Height="32" Width="110"/>
+        <ListView x:Name="list2" d:ItemsSource="{d:SampleData ItemCount=1}" Margin="10,10,293,176" MouseDoubleClick="list2_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Код отчёта" DisplayMemberBinding="{Binding Код_отчёта}"/>
+                    <GridViewColumn Header="Количество гот заявок" DisplayMemberBinding="{Binding Количество_гот_заявок}"/>
+                    <GridViewColumn Header="Время выполнения" DisplayMemberBinding="{Binding Время_выполнения}"/>
+                    <GridViewColumn Header="Код заявки" DisplayMemberBinding="{Binding Код_заявки}"/>
+                    <GridViewColumn Header="Код доп" DisplayMemberBinding="{Binding Код_доп}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox x:Name="t1" HorizontalAlignment="Left" Margin="539,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="27"/>
+        <TextBox x:Name="t2" HorizontalAlignment="Left" Margin="539,94,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="27"/>
+        <TextBox x:Name="t3" HorizontalAlignment="Left" Margin="539,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="27"/>
+        <TextBox x:Name="t4" HorizontalAlignment="Left" Margin="539,231,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="27"/>
+        <TextBox x:Name="t5" HorizontalAlignment="Left" Margin="676,231,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="75" Height="27"/>
+        <Label Content="Кол-во готовых заявок" HorizontalAlignment="Left" Margin="539,9,0,0" VerticalAlignment="Top"/>
+        <Label Content="Среднее время выполнения" HorizontalAlignment="Left" Margin="539,67,0,0" VerticalAlignment="Top"/>
+        <Label Content="Код заявки" HorizontalAlignment="Left" Margin="539,127,0,0" VerticalAlignment="Top"/>
+        <Label Content="Материал" HorizontalAlignment="Left" Margin="539,200,0,0" VerticalAlignment="Top"/>
+        <Label Content="Кол-во" HorizontalAlignment="Left" Margin="676,199,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

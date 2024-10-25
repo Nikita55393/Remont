@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ProgramModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Вид">
+          <Key>
+            <PropertyRef Name="Код_вида" />
+          </Key>
+          <Property Name="Код_вида" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Доп_материал">
+          <Key>
+            <PropertyRef Name="Код_доп" />
+          </Key>
+          <Property Name="Код_доп" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_материала" Type="int" />
+          <Property Name="Количество" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Заявка1">
+          <Key>
+            <PropertyRef Name="Код_заявки" />
+          </Key>
+          <Property Name="Код_заявки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Дата" Type="date" />
+          <Property Name="Код_оргтехники" Type="int" />
+          <Property Name="Описание" Type="nvarchar" MaxLength="200" />
+          <Property Name="Код_пользователя" Type="int" />
+          <Property Name="ФИО_клиента" Type="nvarchar" MaxLength="150" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="11" />
+          <Property Name="Код_статуса" Type="int" />
+          <Property Name="Код_мастера" Type="int" />
+          <Property Name="Номер_заявки" Type="nvarchar" MaxLength="50" />
+          <Property Name="Комментарий" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Материал">
+          <Key>
+            <PropertyRef Name="Код_материала" />
+          </Key>
+          <Property Name="Код_материала" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Оргтехника">
+          <Key>
+            <PropertyRef Name="Код_оргтехники" />
+          </Key>
+          <Property Name="Код_оргтехники" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Модель" Type="nvarchar" MaxLength="50" />
+          <Property Name="Код_вида" Type="int" />
+        </EntityType>
+        <EntityType Name="Отчёт">
+          <Key>
+            <PropertyRef Name="Код_отчёта" />
+          </Key>
+          <Property Name="Код_отчёта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Количество_гот_заяврок" Type="nvarchar" MaxLength="50" />
+          <Property Name="Время_выполнения" Type="nvarchar" MaxLength="50" />
+          <Property Name="Код_заявки" Type="int" />
+          <Property Name="Код_доп" Type="int" />
+        </EntityType>
+        <EntityType Name="Пользователь">
+          <Key>
+            <PropertyRef Name="Код_пользователя" />
+          </Key>
+          <Property Name="Код_пользователя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Логин" Type="nvarchar" MaxLength="50" />
+          <Property Name="Пароль" Type="nvarchar" MaxLength="50" />
+          <Property Name="Код_типа_пользователя" Type="int" />
+          <Property Name="ФИО" Type="nvarchar" MaxLength="150" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Статус">
+          <Key>
+            <PropertyRef Name="Код_статуса" />
+          </Key>
+          <Property Name="Код_статуса" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Тип_пользователя">
+          <Key>
+            <PropertyRef Name="Код_типа_пользователя" />
+          </Key>
+          <Property Name="Код_типа_пользователя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Должность" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Доп_материал_Материал">
+          <End Role="Материал" Type="Self.Материал" Multiplicity="0..1" />
+          <End Role="Доп_материал" Type="Self.Доп_материал" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Материал">
+              <PropertyRef Name="Код_материала" />
+            </Principal>
+            <Dependent Role="Доп_материал">
+              <PropertyRef Name="Код_материала" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка1_Оргтехника">
+          <End Role="Оргтехника" Type="Self.Оргтехника" Multiplicity="0..1" />
+          <End Role="Заявка1" Type="Self.Заявка1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Оргтехника">
+              <PropertyRef Name="Код_оргтехники" />
+            </Principal>
+            <Dependent Role="Заявка1">
+              <PropertyRef Name="Код_оргтехники" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка1_Пользователь">
+          <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="0..1" />
+          <End Role="Заявка1" Type="Self.Заявка1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователь">
+              <PropertyRef Name="Код_пользователя" />
+            </Principal>
+            <Dependent Role="Заявка1">
+              <PropertyRef Name="Код_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка1_Статус">
+          <End Role="Статус" Type="Self.Статус" Multiplicity="0..1" />
+          <End Role="Заявка1" Type="Self.Заявка1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статус">
+              <PropertyRef Name="Код_статуса" />
+            </Principal>
+            <Dependent Role="Заявка1">
+              <PropertyRef Name="Код_статуса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Оргтехника_Вид">
+          <End Role="Вид" Type="Self.Вид" Multiplicity="0..1" />
+          <End Role="Оргтехника" Type="Self.Оргтехника" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Вид">
+              <PropertyRef Name="Код_вида" />
+            </Principal>
+            <Dependent Role="Оргтехника">
+              <PropertyRef Name="Код_вида" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Отчёт_Доп_материал">
+          <End Role="Доп_материал" Type="Self.Доп_материал" Multiplicity="0..1" />
+          <End Role="Отчёт" Type="Self.Отчёт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Доп_материал">
+              <PropertyRef Name="Код_доп" />
+            </Principal>
+            <Dependent Role="Отчёт">
+              <PropertyRef Name="Код_доп" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Отчёт_Заявка1">
+          <End Role="Заявка1" Type="Self.Заявка1" Multiplicity="0..1" />
+          <End Role="Отчёт" Type="Self.Отчёт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заявка1">
+              <PropertyRef Name="Код_заявки" />
+            </Principal>
+            <Dependent Role="Отчёт">
+              <PropertyRef Name="Код_заявки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Пользователь_Тип_пользователя">
+          <End Role="Тип_пользователя" Type="Self.Тип_пользователя" Multiplicity="0..1" />
+          <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_пользователя">
+              <PropertyRef Name="Код_типа_пользователя" />
+            </Principal>
+            <Dependent Role="Пользователь">
+              <PropertyRef Name="Код_типа_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ProgramModelContainer">
+          <EntitySet Name="Вид" EntityType="Self.Вид" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Доп_материал" EntityType="Self.Доп_материал" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Заявка1" EntityType="Self.Заявка1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Материал" EntityType="Self.Материал" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Оргтехника" EntityType="Self.Оргтехника" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Отчёт" EntityType="Self.Отчёт" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Пользователь" EntityType="Self.Пользователь" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Статус" EntityType="Self.Статус" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тип_пользователя" EntityType="Self.Тип_пользователя" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Доп_материал_Материал" Association="Self.FK_Доп_материал_Материал">
+            <End Role="Материал" EntitySet="Материал" />
+            <End Role="Доп_материал" EntitySet="Доп_материал" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка1_Оргтехника" Association="Self.FK_Заявка1_Оргтехника">
+            <End Role="Оргтехника" EntitySet="Оргтехника" />
+            <End Role="Заявка1" EntitySet="Заявка1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка1_Пользователь" Association="Self.FK_Заявка1_Пользователь">
+            <End Role="Пользователь" EntitySet="Пользователь" />
+            <End Role="Заявка1" EntitySet="Заявка1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка1_Статус" Association="Self.FK_Заявка1_Статус">
+            <End Role="Статус" EntitySet="Статус" />
+            <End Role="Заявка1" EntitySet="Заявка1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Оргтехника_Вид" Association="Self.FK_Оргтехника_Вид">
+            <End Role="Вид" EntitySet="Вид" />
+            <End Role="Оргтехника" EntitySet="Оргтехника" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Отчёт_Доп_материал" Association="Self.FK_Отчёт_Доп_материал">
+            <End Role="Доп_материал" EntitySet="Доп_материал" />
+            <End Role="Отчёт" EntitySet="Отчёт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Отчёт_Заявка1" Association="Self.FK_Отчёт_Заявка1">
+            <End Role="Заявка1" EntitySet="Заявка1" />
+            <End Role="Отчёт" EntitySet="Отчёт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Пользователь_Тип_пользователя" Association="Self.FK_Пользователь_Тип_пользователя">
+            <End Role="Тип_пользователя" EntitySet="Тип_пользователя" />
+            <End Role="Пользователь" EntitySet="Пользователь" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProgramModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Вид">
+          <Key>
+            <PropertyRef Name="Код_вида" />
+          </Key>
+          <Property Name="Код_вида" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Оргтехника" Relationship="Self.FK_Оргтехника_Вид" FromRole="Вид" ToRole="Оргтехника" />
+        </EntityType>
+        <EntityType Name="Доп_материал">
+          <Key>
+            <PropertyRef Name="Код_доп" />
+          </Key>
+          <Property Name="Код_доп" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_материала" Type="Int32" />
+          <Property Name="Количество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Материал" Relationship="Self.FK_Доп_материал_Материал" FromRole="Доп_материал" ToRole="Материал" />
+          <NavigationProperty Name="Отчёт" Relationship="Self.FK_Отчёт_Доп_материал" FromRole="Доп_материал" ToRole="Отчёт" />
+        </EntityType>
+        <EntityType Name="Заявка1">
+          <Key>
+            <PropertyRef Name="Код_заявки" />
+          </Key>
+          <Property Name="Код_заявки" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Дата" Type="DateTime" Precision="0" />
+          <Property Name="Код_оргтехники" Type="Int32" />
+          <Property Name="Описание" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Код_пользователя" Type="Int32" />
+          <Property Name="ФИО_клиента" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Телефон" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Код_статуса" Type="Int32" />
+          <Property Name="Код_мастера" Type="Int32" />
+          <Property Name="Номер_заявки" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Комментарий" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Оргтехника" Relationship="Self.FK_Заявка1_Оргтехника" FromRole="Заявка1" ToRole="Оргтехника" />
+          <NavigationProperty Name="Пользователь" Relationship="Self.FK_Заявка1_Пользователь" FromRole="Заявка1" ToRole="Пользователь" />
+          <NavigationProperty Name="Статус" Relationship="Self.FK_Заявка1_Статус" FromRole="Заявка1" ToRole="Статус" />
+          <NavigationProperty Name="Отчёт" Relationship="Self.FK_Отчёт_Заявка1" FromRole="Заявка1" ToRole="Отчёт" />
+        </EntityType>
+        <EntityType Name="Материал">
+          <Key>
+            <PropertyRef Name="Код_материала" />
+          </Key>
+          <Property Name="Код_материала" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Доп_материал" Relationship="Self.FK_Доп_материал_Материал" FromRole="Материал" ToRole="Доп_материал" />
+        </EntityType>
+        <EntityType Name="Оргтехника">
+          <Key>
+            <PropertyRef Name="Код_оргтехники" />
+          </Key>
+          <Property Name="Код_оргтехники" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Модель" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Код_вида" Type="Int32" />
+          <NavigationProperty Name="Вид" Relationship="Self.FK_Оргтехника_Вид" FromRole="Оргтехника" ToRole="Вид" />
+          <NavigationProperty Name="Заявка1" Relationship="Self.FK_Заявка1_Оргтехника" FromRole="Оргтехника" ToRole="Заявка1" />
+        </EntityType>
+        <EntityType Name="Отчёт">
+          <Key>
+            <PropertyRef Name="Код_отчёта" />
+          </Key>
+          <Property Name="Код_отчёта" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Количество_гот_заяврок" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Время_выполнения" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Код_заявки" Type="Int32" />
+          <Property Name="Код_доп" Type="Int32" />
+          <NavigationProperty Name="Доп_материал" Relationship="Self.FK_Отчёт_Доп_материал" FromRole="Отчёт" ToRole="Доп_материал" />
+          <NavigationProperty Name="Заявка1" Relationship="Self.FK_Отчёт_Заявка1" FromRole="Отчёт" ToRole="Заявка1" />
+        </EntityType>
+        <EntityType Name="Пользователь">
+          <Key>
+            <PropertyRef Name="Код_пользователя" />
+          </Key>
+          <Property Name="Код_пользователя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Код_типа_пользователя" Type="Int32" />
+          <Property Name="ФИО" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Телефон" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Заявка1" Relationship="Self.FK_Заявка1_Пользователь" FromRole="Пользователь" ToRole="Заявка1" />
+          <NavigationProperty Name="Тип_пользователя" Relationship="Self.FK_Пользователь_Тип_пользователя" FromRole="Пользователь" ToRole="Тип_пользователя" />
+        </EntityType>
+        <EntityType Name="Статус">
+          <Key>
+            <PropertyRef Name="Код_статуса" />
+          </Key>
+          <Property Name="Код_статуса" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Заявка1" Relationship="Self.FK_Заявка1_Статус" FromRole="Статус" ToRole="Заявка1" />
+        </EntityType>
+        <EntityType Name="Тип_пользователя">
+          <Key>
+            <PropertyRef Name="Код_типа_пользователя" />
+          </Key>
+          <Property Name="Код_типа_пользователя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Должность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Пользователь" Relationship="Self.FK_Пользователь_Тип_пользователя" FromRole="Тип_пользователя" ToRole="Пользователь" />
+        </EntityType>
+        <Association Name="FK_Оргтехника_Вид">
+          <End Role="Вид" Type="Self.Вид" Multiplicity="0..1" />
+          <End Role="Оргтехника" Type="Self.Оргтехника" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Вид">
+              <PropertyRef Name="Код_вида" />
+            </Principal>
+            <Dependent Role="Оргтехника">
+              <PropertyRef Name="Код_вида" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Доп_материал_Материал">
+          <End Role="Материал" Type="Self.Материал" Multiplicity="0..1" />
+          <End Role="Доп_материал" Type="Self.Доп_материал" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Материал">
+              <PropertyRef Name="Код_материала" />
+            </Principal>
+            <Dependent Role="Доп_материал">
+              <PropertyRef Name="Код_материала" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Отчёт_Доп_материал">
+          <End Role="Доп_материал" Type="Self.Доп_материал" Multiplicity="0..1" />
+          <End Role="Отчёт" Type="Self.Отчёт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Доп_материал">
+              <PropertyRef Name="Код_доп" />
+            </Principal>
+            <Dependent Role="Отчёт">
+              <PropertyRef Name="Код_доп" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка1_Оргтехника">
+          <End Role="Оргтехника" Type="Self.Оргтехника" Multiplicity="0..1" />
+          <End Role="Заявка1" Type="Self.Заявка1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Оргтехника">
+              <PropertyRef Name="Код_оргтехники" />
+            </Principal>
+            <Dependent Role="Заявка1">
+              <PropertyRef Name="Код_оргтехники" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка1_Пользователь">
+          <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="0..1" />
+          <End Role="Заявка1" Type="Self.Заявка1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователь">
+              <PropertyRef Name="Код_пользователя" />
+            </Principal>
+            <Dependent Role="Заявка1">
+              <PropertyRef Name="Код_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка1_Статус">
+          <End Role="Статус" Type="Self.Статус" Multiplicity="0..1" />
+          <End Role="Заявка1" Type="Self.Заявка1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статус">
+              <PropertyRef Name="Код_статуса" />
+            </Principal>
+            <Dependent Role="Заявка1">
+              <PropertyRef Name="Код_статуса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Отчёт_Заявка1">
+          <End Role="Заявка1" Type="Self.Заявка1" Multiplicity="0..1" />
+          <End Role="Отчёт" Type="Self.Отчёт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заявка1">
+              <PropertyRef Name="Код_заявки" />
+            </Principal>
+            <Dependent Role="Отчёт">
+              <PropertyRef Name="Код_заявки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Пользователь_Тип_пользователя">
+          <End Role="Тип_пользователя" Type="Self.Тип_пользователя" Multiplicity="0..1" />
+          <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_пользователя">
+              <PropertyRef Name="Код_типа_пользователя" />
+            </Principal>
+            <Dependent Role="Пользователь">
+              <PropertyRef Name="Код_типа_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProgramEntities11" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Вид" EntityType="Self.Вид" />
+          <EntitySet Name="Доп_материал" EntityType="Self.Доп_материал" />
+          <EntitySet Name="Заявка1" EntityType="Self.Заявка1" />
+          <EntitySet Name="Материал" EntityType="Self.Материал" />
+          <EntitySet Name="Оргтехника" EntityType="Self.Оргтехника" />
+          <EntitySet Name="Отчёт" EntityType="Self.Отчёт" />
+          <EntitySet Name="Пользователь" EntityType="Self.Пользователь" />
+          <EntitySet Name="Статус" EntityType="Self.Статус" />
+          <EntitySet Name="Тип_пользователя" EntityType="Self.Тип_пользователя" />
+          <AssociationSet Name="FK_Оргтехника_Вид" Association="Self.FK_Оргтехника_Вид">
+            <End Role="Вид" EntitySet="Вид" />
+            <End Role="Оргтехника" EntitySet="Оргтехника" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Доп_материал_Материал" Association="Self.FK_Доп_материал_Материал">
+            <End Role="Материал" EntitySet="Материал" />
+            <End Role="Доп_материал" EntitySet="Доп_материал" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Отчёт_Доп_материал" Association="Self.FK_Отчёт_Доп_материал">
+            <End Role="Доп_материал" EntitySet="Доп_материал" />
+            <End Role="Отчёт" EntitySet="Отчёт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка1_Оргтехника" Association="Self.FK_Заявка1_Оргтехника">
+            <End Role="Оргтехника" EntitySet="Оргтехника" />
+            <End Role="Заявка1" EntitySet="Заявка1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка1_Пользователь" Association="Self.FK_Заявка1_Пользователь">
+            <End Role="Пользователь" EntitySet="Пользователь" />
+            <End Role="Заявка1" EntitySet="Заявка1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка1_Статус" Association="Self.FK_Заявка1_Статус">
+            <End Role="Статус" EntitySet="Статус" />
+            <End Role="Заявка1" EntitySet="Заявка1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Отчёт_Заявка1" Association="Self.FK_Отчёт_Заявка1">
+            <End Role="Заявка1" EntitySet="Заявка1" />
+            <End Role="Отчёт" EntitySet="Отчёт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Пользователь_Тип_пользователя" Association="Self.FK_Пользователь_Тип_пользователя">
+            <End Role="Тип_пользователя" EntitySet="Тип_пользователя" />
+            <End Role="Пользователь" EntitySet="Пользователь" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ProgramModelContainer" CdmEntityContainer="ProgramEntities11">
+          <EntitySetMapping Name="Вид">
+            <EntityTypeMapping TypeName="ProgramModel.Вид">
+              <MappingFragment StoreEntitySet="Вид">
+                <ScalarProperty Name="Код_вида" ColumnName="Код_вида" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Доп_материал">
+            <EntityTypeMapping TypeName="ProgramModel.Доп_материал">
+              <MappingFragment StoreEntitySet="Доп_материал">
+                <ScalarProperty Name="Код_доп" ColumnName="Код_доп" />
+                <ScalarProperty Name="Код_материала" ColumnName="Код_материала" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Заявка1">
+            <EntityTypeMapping TypeName="ProgramModel.Заявка1">
+              <MappingFragment StoreEntitySet="Заявка1">
+                <ScalarProperty Name="Код_заявки" ColumnName="Код_заявки" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Код_оргтехники" ColumnName="Код_оргтехники" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Код_пользователя" ColumnName="Код_пользователя" />
+                <ScalarProperty Name="ФИО_клиента" ColumnName="ФИО_клиента" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Код_статуса" ColumnName="Код_статуса" />
+                <ScalarProperty Name="Код_мастера" ColumnName="Код_мастера" />
+                <ScalarProperty Name="Номер_заявки" ColumnName="Номер_заявки" />
+                <ScalarProperty Name="Комментарий" ColumnName="Комментарий" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Материал">
+            <EntityTypeMapping TypeName="ProgramModel.Материал">
+              <MappingFragment StoreEntitySet="Материал">
+                <ScalarProperty Name="Код_материала" ColumnName="Код_материала" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Оргтехника">
+            <EntityTypeMapping TypeName="ProgramModel.Оргтехника">
+              <MappingFragment StoreEntitySet="Оргтехника">
+                <ScalarProperty Name="Код_оргтехники" ColumnName="Код_оргтехники" />
+                <ScalarProperty Name="Модель" ColumnName="Модель" />
+                <ScalarProperty Name="Код_вида" ColumnName="Код_вида" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Отчёт">
+            <EntityTypeMapping TypeName="ProgramModel.Отчёт">
+              <MappingFragment StoreEntitySet="Отчёт">
+                <ScalarProperty Name="Код_отчёта" ColumnName="Код_отчёта" />
+                <ScalarProperty Name="Количество_гот_заяврок" ColumnName="Количество_гот_заяврок" />
+                <ScalarProperty Name="Время_выполнения" ColumnName="Время_выполнения" />
+                <ScalarProperty Name="Код_заявки" ColumnName="Код_заявки" />
+                <ScalarProperty Name="Код_доп" ColumnName="Код_доп" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пользователь">
+            <EntityTypeMapping TypeName="ProgramModel.Пользователь">
+              <MappingFragment StoreEntitySet="Пользователь">
+                <ScalarProperty Name="Код_пользователя" ColumnName="Код_пользователя" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Код_типа_пользователя" ColumnName="Код_типа_пользователя" />
+                <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Статус">
+            <EntityTypeMapping TypeName="ProgramModel.Статус">
+              <MappingFragment StoreEntitySet="Статус">
+                <ScalarProperty Name="Код_статуса" ColumnName="Код_статуса" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тип_пользователя">
+            <EntityTypeMapping TypeName="ProgramModel.Тип_пользователя">
+              <MappingFragment StoreEntitySet="Тип_пользователя">
+                <ScalarProperty Name="Код_типа_пользователя" ColumnName="Код_типа_пользователя" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

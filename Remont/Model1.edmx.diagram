@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="991cd22c36494219a2e880d1b689dfce" Name="Diagram1">
+        <EntityTypeShape EntityType="ProgramModel.Вид" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProgramModel.Доп_материал" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProgramModel.Заявка1" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProgramModel.Материал" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProgramModel.Оргтехника" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProgramModel.Отчёт" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProgramModel.Пользователь" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProgramModel.Статус" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProgramModel.Тип_пользователя" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="ProgramModel.FK_Оргтехника_Вид" ManuallyRouted="false" />
+        <AssociationConnector Association="ProgramModel.FK_Доп_материал_Материал" ManuallyRouted="false" />
+        <AssociationConnector Association="ProgramModel.FK_Отчёт_Доп_материал" ManuallyRouted="false" />
+        <AssociationConnector Association="ProgramModel.FK_Заявка1_Оргтехника" ManuallyRouted="false" />
+        <AssociationConnector Association="ProgramModel.FK_Заявка1_Пользователь" ManuallyRouted="false" />
+        <AssociationConnector Association="ProgramModel.FK_Заявка1_Статус" ManuallyRouted="false" />
+        <AssociationConnector Association="ProgramModel.FK_Отчёт_Заявка1" ManuallyRouted="false" />
+        <AssociationConnector Association="ProgramModel.FK_Пользователь_Тип_пользователя" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

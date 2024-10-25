@@ -1,0 +1,18 @@
+﻿<Window x:Class="Remont.Welcome"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Remont"
+        mc:Ignorable="d"
+        Title="Welcome" Height="450" Width="800">
+    <Grid x:Name="bt7">
+        <Button x:Name="bt2" Content="Информация о заявках" HorizontalAlignment="Left" Margin="28,34,0,0" VerticalAlignment="Top" Height="34" Width="143" Click="bt2_Click" Visibility="Hidden"/>
+        <Button x:Name="bt5" Content="Отчёт" HorizontalAlignment="Left" Margin="28,131,0,0" VerticalAlignment="Top" Height="34" Click="bt5_Click" Width="143" Visibility="Hidden"/>
+        <Button x:Name="bt1" Content="Добавить заявку" HorizontalAlignment="Left" Margin="28,29,0,0" VerticalAlignment="Top" Height="34" Width="143" Click="bt1_Click" Visibility="Hidden"/>
+        <Button x:Name="bt3" Content="Отследить сататус заявки" HorizontalAlignment="Left" Margin="28,83,0,0" VerticalAlignment="Top" Height="34" Click="bt3_Click" Visibility="Hidden"/>
+        <Button x:Name="bt6" Content="Зафиксировать инф. о запасных запчастях" HorizontalAlignment="Left" Margin="28,131,0,0" VerticalAlignment="Top" Height="34" Width="143" Click="bt6_Click" Visibility="Hidden"/>
+        <Button Content="Назад" HorizontalAlignment="Left" Margin="692,348,0,0" VerticalAlignment="Top" Height="34" Width="76" Click="Button_Click"/>
+
+    </Grid>
+</Window>

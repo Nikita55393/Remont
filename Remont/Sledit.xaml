@@ -1,0 +1,34 @@
+﻿<Window x:Class="Remont.Sledit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Remont"
+        mc:Ignorable="d"
+        Title="Sledit" Height="450" Width="800">
+    <Grid>
+        <Button Content="Назад" HorizontalAlignment="Left" Margin="643,379,0,0" VerticalAlignment="Top" Click="Button_Click" Height="28" Width="103"/>
+        <ListView x:Name="list1" d:ItemsSource="{d:SampleData ItemCount=1}" Margin="10,10,383,248" MouseDoubleClick="list1_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Дата}"/>
+                    <GridViewColumn Header="Описание" DisplayMemberBinding="{Binding Описание}"/>
+                    <GridViewColumn Header="ФИО_клиента" DisplayMemberBinding="{Binding ФИО_клиента}"/>
+                    <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding Телефон}"/>
+                    <GridViewColumn Header="Номер_заявки" DisplayMemberBinding="{Binding Номер_заявки}"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox x:Name="t1" HorizontalAlignment="Left" Margin="450,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="167" Height="26" IsEnabled="False"/>
+        <TextBox x:Name="t2" HorizontalAlignment="Left" Margin="450,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="167" Height="92" IsEnabled="False"/>
+        <Label Content="Статус" HorizontalAlignment="Left" Margin="450,22,0,0" VerticalAlignment="Top"/>
+        <Label Content="Комментарий" HorizontalAlignment="Left" Margin="450,94,0,0" VerticalAlignment="Top"/>
+        <Image x:Name="QR" Source="img/qrcode.png" HorizontalAlignment="Left" Height="124" Margin="42,264,0,0" VerticalAlignment="Top" Width="128" MouseDown="QR_MouseDown"/>
+        <Label Content="Оставьте отзыв!  " HorizontalAlignment="Left" Margin="35,186,0,0" VerticalAlignment="Top" Height="36" Foreground="Red" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Помогите улучшить работу " HorizontalAlignment="Left" Margin="27,214,0,0" VerticalAlignment="Top" Foreground="Red" FontWeight="Bold" FontSize="11"/>
+        <Label Content="сотрудников сервесного центра" HorizontalAlignment="Left" Margin="13,234,0,0" VerticalAlignment="Top" Foreground="Red" FontWeight="Bold" FontSize="11"/>
+        <Label Content="Клик по QR-коду" HorizontalAlignment="Left" Margin="49,380,0,0" VerticalAlignment="Top" Foreground="#FFFFA600" FontWeight="Bold"/>
+
+    </Grid>
+</Window>
